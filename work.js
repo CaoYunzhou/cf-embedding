@@ -21,7 +21,7 @@ export default {
             return new Response('Missing input', { status: 400 });
         }
 
-        const input = { text: postData.input[0] };
+        const input = { text: postData.input };
         console.log('AI input:', input);
 
         const aiResponse = await ai.run('@cf/baai/bge-base-en-v1.5', input);
