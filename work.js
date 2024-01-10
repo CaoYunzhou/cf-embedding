@@ -17,28 +17,33 @@ export default {
 
         const ai = new Ai(env.AI);
         const postData = await request.json();
-        if (!postData.input) {
+        if (!postData.input || !Array.isArray(postData.input) || postData.input.length === 0) {
             return new Response('Missing input', { status: 400 });
         }
 
-        const input = { text: postData.input };
-        console.log('AI input:', input);
-
-        const aiResponse = await ai.run('@cf/baai/bge-base-en-v1.5', input);
-        console.log('AI response:', aiResponse);
-
         const responseData = {
-            data: [
-                {
-                    embedding: aiResponse.data[0],
-                    index: 0,
-                },
-            ],
+            data: [],
             usage: {
-                prompt_tokens: input.text.length,
-                total_tokens: input.text.length,
+                prompt_tokens: 0,
+                total_tokens: 0,
             },
         };
+
+        for (let i = 0; i < postData.input.length; i++) {
+            const input = { text: postData.input[i] };
+            console.log('AI input:', input);
+
+            const aiResponse = await ai.run('@cf/baai/bge-base-en-v1.5', input);
+            console.log('AI response:', aiResponse);
+
+            responseData.data.push({
+                embedding: aiResponse.data,
+                index: i,
+            });
+
+            responseData.usage.prompt_tokens += input.text.length;
+            responseData.usage.total_tokens += input.text.length;
+        }
 
         return new Response(JSON.stringify(responseData), {
             headers: { 'content-type': 'application/json' },
