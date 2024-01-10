@@ -4,7 +4,8 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/caoyunzhou/cf-embedding?style=social)](https://github.com/caoyunzhou/cf-embedding/stargazers)
 
 
-这是一个`cloudflare`的ai worker,可以把`cloudflare`提供的`@cf/baai/bge-base-en-v1.5`进行文本向量化
+- 这是一个`cloudflare`的ai worker,可以把`cloudflare`提供的`@cf/baai/bge-base-en-v1.5`进行文本向量化
+- 再次感谢CF大善人
 
 ## 部署方法
 
@@ -21,6 +22,15 @@ curl https://embedding.aivvm.com/v1/embeddings \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer sk-123456" \
   -d '{"input":["Your text string goes here"],
+  "model":"text-embedding-ada-002"
+  }'
+```
+
+```bash
+curl https://embedding.aivvm.com/v1/embeddings \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-123456" \
+  -d '{"input":["Your text string goes here","hello world"],
   "model":"text-embedding-ada-002"
   }'
 ```
