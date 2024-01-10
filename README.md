@@ -17,12 +17,10 @@
 ## 使用
 
 ```bash
-curl https://embedding.aivvm.com \
+curl https://embedding.aivvm.com/v1/embeddings \
   -H "Content-Type: application/json" \
-  -d '{
-    "model": "dall-e-3",
-    "prompt": "A cute cat",
-    "n": 1,
-    "size": "1024x1024"
+  -H "Authorization: Bearer sk-123456" \
+  -d '{"input":["Your text string goes here"],
+  "model":"text-embedding-ada-002"
   }'
 ```
