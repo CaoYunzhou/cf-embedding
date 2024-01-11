@@ -22,6 +22,8 @@ export default {
         }
 
         const responseData = {
+            "object": "list",
+            "model": "text-embedding-ada-002",
             data: [],
             usage: {
                 prompt_tokens: 0,
@@ -33,11 +35,12 @@ export default {
             const input = { text: postData.input[i] };
             console.log('AI input:', input);
 
-            const aiResponse = await ai.run('@cf/baai/bge-base-en-v1.5', input);
+            const aiResponse = await ai.run('@cf/baai/bge-large-en-v1.5', input);
             console.log('AI response:', aiResponse);
 
             responseData.data.push({
-                embedding: aiResponse.data,
+                "object": "embedding",
+                embedding: aiResponse.data[0],
                 index: i,
             });
 
