@@ -11,7 +11,7 @@
 
 - 感谢[cloudflare](https://cloudflare.com)
 - 开通cloudflare的WorkAi功能
-- 把index.js的内容粘贴到cloudflare的work中
+- 把work.js的内容粘贴到cloudflare的work中
 - 在cloudflare > work > 触发器,配置自定义域名就可以愉快的文本向量了
 
 
